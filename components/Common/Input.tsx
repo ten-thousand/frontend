@@ -2,21 +2,25 @@ import React from 'react';
 import styled from 'styled-components';
 
 type Props = React.HTMLAttributes<HTMLInputElement> & {
-  label: string;
-  type: string;
-  value: string;
+  className?: string;
+  label?: string;
+  type?: string;
+  value?: string;
+  style?: React.CSSProperties;
 };
 
 export const Input: React.FC<Props> = ({
+  className,
   label,
   type,
   value,
+  style,
   ...inputProps
 }) => {
   return (
-    <Container>
+    <Container className={className}>
       <Label>{label}</Label>
-      <TextInput type={type} value={value} {...inputProps} />
+      <TextInput type={type} value={value} style={style} {...inputProps} />
     </Container>
   );
 };
