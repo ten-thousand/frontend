@@ -8,6 +8,7 @@ export const GlobalStyle = createGlobalStyle`
   body {
     padding: 0;
     margin: 0;
+    font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
   }
 
   a {
