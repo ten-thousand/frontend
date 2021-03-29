@@ -4,7 +4,7 @@ import styled from 'styled-components';
 import { InvitationStatus } from '@/components/Home/InvitationStatus';
 import { PhoneAuthForm } from '@/components/Home/PhoneAuth/PhoneAuthForm';
 
-const Home = () => {
+const HomePage = () => {
   return (
     <Container>
       <InvitationStatus />
@@ -13,7 +13,7 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomePage;
 
 const Container = styled.div`
   min-height: 100vh;
