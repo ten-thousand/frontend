@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { toast } from 'react-toastify';
 import styled from 'styled-components';
 
 import { Button } from './Button';
@@ -9,6 +10,9 @@ export const PhoneAuthForm = () => {
 
   const [isAuthCodeSent, setAuthCodeSent] = useState<boolean>(false);
   const [authCode, setAuthCode] = useState<string>('');
+
+  const canSendAuthCode = !!phoneNumber;
+  const canCheckAuthCode = !!authCode;
 
   return (
     <Container>
@@ -33,15 +37,28 @@ export const PhoneAuthForm = () => {
       {!isAuthCodeSent ? (
         <Button
           primary
-          disabled={!phoneNumber}
+          ready={canSendAuthCode}
           onClick={() => {
+            if (!canSendAuthCode) {
+              toast('전화번호를 입력해 주세요!');
+              return;
+            }
             setAuthCodeSent(true);
           }}
         >
           인증번호 받기
         </Button>
       ) : (
-        <Button primary disabled={!authCode} onClick={() => {}}>
+        <Button
+          primary
+          ready={canCheckAuthCode}
+          onClick={() => {
+            if (!canCheckAuthCode) {
+              toast('인증번호를 입력해 주세요!');
+              return;
+            }
+          }}
+        >
           가입하기
         </Button>
       )}

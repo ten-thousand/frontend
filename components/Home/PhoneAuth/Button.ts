@@ -2,7 +2,7 @@ import styled, { css } from 'styled-components';
 
 type Props = {
   primary?: boolean;
-  disabled?: boolean;
+  ready?: boolean;
 };
 
 export const Button = styled.button<Props>`
@@ -12,10 +12,10 @@ export const Button = styled.button<Props>`
   font-size: 1.05rem;
   width: 100%;
 
-  ${({ primary, disabled }) =>
+  ${({ primary, ready = true }) =>
     primary &&
     css`
-      background-color: ${!disabled ? '#212529' : '#343a40'};
+      background-color: ${ready ? '#212529' : '#343a40'};
       color: rgba(255, 255, 255, 0.95);
     `};
 `;
