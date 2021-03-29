@@ -1,9 +1,15 @@
+import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
 
 const LandingPage = () => {
   // TODO: implement landing page
-  return <Container></Container>;
+  return (
+    <Container>
+      {/* FIXME: remove helper link */}
+      <Link href="/dashboard">{'/dashboard'}</Link>
+    </Container>
+  );
 };
 
 export default LandingPage;

@@ -3,12 +3,14 @@ import styled from 'styled-components';
 
 import { Button } from '@/components/Common/Button';
 import { Input } from '@/components/Common/Input';
+import { MessageBanner } from '@/components/Common/MessageBanner';
 import { InvitationStatus } from '@/components/Home/InvitationStatus';
 
 const DashboardPage = () => {
   return (
     <Wrapper>
       <Container>
+        <MessageBanner>📮 초대장이 8장 남았습니다.</MessageBanner>
         <InvitationStatus />
         <LinkList>
           {/* FIXME: change these hard coded links into dynamic links from server */}
