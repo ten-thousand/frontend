@@ -3,11 +3,13 @@ import styled from 'styled-components';
 
 import { Button } from '@/components/Common/Button';
 import { Input } from '@/components/Common/Input';
+import { InvitationStatus } from '@/components/Home/InvitationStatus';
 
 const DashboardPage = () => {
   return (
     <Wrapper>
       <Container>
+        <InvitationStatus />
         <LinkList>
           {/* FIXME: change these hard coded links into dynamic links from server */}
           <ul>
@@ -46,7 +48,7 @@ const Wrapper = styled.div`
 `;
 
 const Container = styled.div`
-  width: 500px;
+  width: 420px;
   margin: 0 auto;
 `;
 

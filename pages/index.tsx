@@ -1,19 +1,12 @@
 import React from 'react';
 import styled from 'styled-components';
 
-import { InvitationStatus } from '@/components/Home/InvitationStatus';
-import { PhoneAuthForm } from '@/components/Home/PhoneAuthForm';
-
-const HomePage = () => {
-  return (
-    <Container>
-      <InvitationStatus />
-      <PhoneAuthForm />
-    </Container>
-  );
+const LandingPage = () => {
+  // TODO: implement landing page
+  return <Container></Container>;
 };
 
-export default HomePage;
+export default LandingPage;
 
 const Container = styled.div`
   min-height: 100vh;
