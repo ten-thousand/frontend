@@ -1,39 +1,56 @@
-import React from 'react';
+import React, { useEffect, useMemo, useState } from 'react';
 import styled from 'styled-components';
+import { v4 as uuidv4 } from 'uuid';
 
 import { Button } from '@/components/Common/Button';
-import { Input } from '@/components/Common/Input';
 import { MessageBanner } from '@/components/Common/MessageBanner';
-import { InvitationStatus } from '@/components/Home/InvitationStatus';
+import { InvitationStatus } from '@/components/Dashboard/InvitationStatus';
+import { LinkRow } from '@/components/Dashboard/LinkRow';
+
+type InviteLink = {
+  id: string;
+  link: string;
+  isUsed?: boolean;
+};
 
 const DashboardPage = () => {
+  const allLinks = useMemo<InviteLink[]>(() => EXAMPLE_LINKS, []);
+  const [nextLinkIndex, setNextLinkIndex] = useState<number>(0);
+  const [inviteLinks, setInviteLinks] = useState<InviteLink[]>([]);
+
+  useEffect(() => {
+    setInviteLinks([allLinks[0]]);
+    setNextLinkIndex(1);
+  }, []);
+
+  const canAddLink = nextLinkIndex > 0 && nextLinkIndex < allLinks.length;
+
+  const onClickAddLink = () => {
+    if (canAddLink) {
+      setInviteLinks([...inviteLinks, allLinks[nextLinkIndex]]);
+      setNextLinkIndex(nextLinkIndex + 1);
+    }
+  };
+
   return (
     <Wrapper>
       <Container>
         <MessageBanner>📮 초대장이 8장 남았습니다.</MessageBanner>
         <InvitationStatus />
         <LinkList>
-          {/* FIXME: change these hard coded links into dynamic links from server */}
-          <ul>
-            <LinkInput
-              label="🙌 초대 링크 1"
-              value="https://ten-thousand.example.com"
+          {inviteLinks.map(({ id, link }, index) => (
+            <LinkRow
+              key={id}
+              label={`🙌 초대 링크 ${index + 1}`}
+              value={link}
             />
-          </ul>
-          <ul>
-            <LinkInput
-              label="🙌 초대 링크 2"
-              value="https://ten-thousand.example.com"
-            />
-          </ul>
-          <ul>
-            <LinkInput
-              label="🙌 초대 링크 3"
-              value="https://ten-thousand.example.com"
-            />
-          </ul>
+          ))}
         </LinkList>
-        <AddLinkButton primary>링크 추가하기</AddLinkButton>
+        {canAddLink && (
+          <AddLinkButton primary onClick={onClickAddLink}>
+            링크 추가하기
+          </AddLinkButton>
+        )}
       </Container>
     </Wrapper>
   );
@@ -52,18 +69,29 @@ const Wrapper = styled.div`
 const Container = styled.div`
   width: 420px;
   margin: 0 auto;
+  margin-bottom: 64px;
 `;
 
 const LinkList = styled.ul`
   width: 100%;
 `;
 
-const LinkInput = styled(Input).attrs({
-  style: { border: '1px solid #ced4da' },
-})`
-  width: 100%;
-  margin-top: 4px;
-  margin-bottom: 24px;
-`;
-
 const AddLinkButton = styled(Button)``;
+
+const EXAMPLE_LINKS: InviteLink[] = [
+  {
+    id: uuidv4(),
+    link: 'https://ten-thousand.example.com/1',
+    isUsed: true,
+  },
+  {
+    id: uuidv4(),
+    link: 'https://ten-thousand.example.com/2',
+    isUsed: true,
+  },
+].concat(
+  Array(8).fill({
+    id: uuidv4(),
+    link: 'https://ten-thousand.example.com',
+  }),
+);
