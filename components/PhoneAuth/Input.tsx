@@ -3,13 +3,14 @@ import styled from 'styled-components';
 
 type Props = React.HTMLAttributes<HTMLInputElement> & {
   label: string;
+  value: string;
 };
 
-export const Input: React.FC<Props> = ({ label, ...inputProps }) => {
+export const Input: React.FC<Props> = ({ label, value, ...inputProps }) => {
   return (
     <Container>
       <Label>{label}</Label>
-      <TextInput {...inputProps} />
+      <TextInput value={value} {...inputProps} />
     </Container>
   );
 };
