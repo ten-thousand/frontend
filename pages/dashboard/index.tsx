@@ -20,6 +20,12 @@ const DashboardPage = () => {
   const [inviteLinks, setInviteLinks] = useState<InviteLink[]>([]);
 
   useEffect(() => {
+    const usedInviteLinks = allLinks.filter((v) => v.isUsed);
+    if (usedInviteLinks.length) {
+      setInviteLinks(usedInviteLinks);
+      setNextLinkIndex(usedInviteLinks.length);
+      return;
+    }
     setInviteLinks([allLinks[0]]);
     setNextLinkIndex(1);
   }, []);
@@ -38,8 +44,13 @@ const DashboardPage = () => {
       <MessageBanner>📮 초대장이 8장 남았습니다.</MessageBanner>
       <InvitationStatus />
       <LinkList>
-        {inviteLinks.map(({ id, link }, index) => (
-          <LinkRow key={id} label={`🙌 초대 링크 ${index + 1}`} value={link} />
+        {inviteLinks.map(({ id, link, isUsed }, index) => (
+          <LinkRow
+            key={id}
+            label={`🙌 초대 링크 ${index + 1}`}
+            value={link}
+            isUsed={isUsed}
+          />
         ))}
       </LinkList>
       {canAddLink && (
@@ -62,17 +73,17 @@ const AddLinkButton = styled(Button)``;
 const EXAMPLE_LINKS: InviteLink[] = [
   {
     id: uuidv4(),
-    link: 'https://ten-thousand.example.com/1',
+    link: 'https://ten-thousand.vercel.app/referral/jHQdaiS/oAsdUUid',
     isUsed: true,
   },
   {
     id: uuidv4(),
-    link: 'https://ten-thousand.example.com/2',
+    link: 'https://ten-thousand.vercel.app/referral/jHQdaiS/oAsdUUid',
     isUsed: true,
   },
 ].concat(
   Array(8).fill({
     id: uuidv4(),
-    link: 'https://ten-thousand.example.com',
+    link: 'https://ten-thousand.vercel.app/referral/jHQdaiS/oAsdUUid',
   }),
 );
