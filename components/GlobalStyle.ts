@@ -42,4 +42,8 @@ export const GlobalStyle = createGlobalStyle`
   * {
     box-sizing: border-box;
   }
+
+  .Toastify__toast-body {
+    color: rgba(0, 0, 0, 0.85) !important;
+  }
 `;
