@@ -2,10 +2,15 @@ import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
 
+import Clubhouse from '@/components/Intro/Clubhouse';
+import Splash from '@/components/Intro/Splash';
+
 const LandingPage = () => {
   // TODO: implement landing page
   return (
     <Container>
+      <Clubhouse />
+      <Splash />
       {/* FIXME: remove example helper links */}
       <ul
         style={{

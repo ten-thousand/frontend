@@ -4,6 +4,8 @@ import { AppProps } from 'next/app';
 import { ToastContainer } from 'react-toastify';
 
 import { GlobalStyle } from '@/components/GlobalStyle';
+import '@/styles/clubhouse.css';
+import '@/styles/splash.css';
 
 const SECOND = 1000;
 
