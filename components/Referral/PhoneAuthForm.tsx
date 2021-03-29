@@ -31,7 +31,7 @@ export const PhoneAuthForm: React.FC<Props> = ({ onClickJoin }) => {
   return (
     <>
       <Input
-        label="사용자 이름"
+        label="👋 뭐라고 불러드릴까요?"
         placeholder="사용할 이름을 입력해 주세요."
         value={username}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
@@ -39,9 +39,9 @@ export const PhoneAuthForm: React.FC<Props> = ({ onClickJoin }) => {
         }
       />
       <Input
-        label="전화번호"
+        label="📨 문자 인증이 필요해요."
         type="number"
-        placeholder="먼저 전화번호 인증이 필요해요."
+        placeholder="인증받을 핸드폰 번호를 입력해주세요!"
         value={phoneNumber}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
           setPhoneNumber(event.target.value)

@@ -18,7 +18,7 @@ const ReferralPage = () => {
 
   return (
     <ScreenContainer>
-      <MessageBanner>📮 @jayhxmo에게 초대되었습니다.</MessageBanner>
+      <MessageBanner>📮 @jayhxmo님이 초대해주셨네요! 🎉 축하드려요!</MessageBanner>
       <InvitationStatus />
       <PhoneAuthForm onClickJoin={onClickJoin} />
     </ScreenContainer>

@@ -28,19 +28,24 @@ export const Input: React.FC<Props> = ({
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 8px 0;
+  margin: 0 0 40px 0;
 `;
 
 const Label = styled.label`
-  font-weight: 500;
-  margin-bottom: 8px;
+  font-size: 18px;
+  line-height: 18px;
+  font-weight: 600;
+  margin-bottom: 16px;
+  color: #ffffff;
 `;
 
 const TextInput = styled.input`
-  padding: 16px 18px;
+  padding: 15px 16px;
   border-radius: 8px;
-  font-size: 1.05rem;
-  background-color: #f1f3f5;
+  font-size: 14px;
+  line-height: 18px;
+  background: rgba(234, 174, 255, 0.08);
+  color: #ffffff;
 
   &[type='number'] {
     -moz-appearance: textfield;
@@ -49,5 +54,9 @@ const TextInput = styled.input`
   &::-webkit-outer-spin-button,
   &::-webkit-inner-spin-button {
     -webkit-appearance: none;
+  }
+
+  &::placeholder {
+    color: rgba(255, 255, 255, 0.33);
   }
 `;

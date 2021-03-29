@@ -14,7 +14,7 @@ const Splash = () => {
 					<h1>
 						{count}<span>명</span>
 					</h1>
-					<h3>10,000까지만 올라갑니다.</h3>
+					<h3>10000까지만 올라갑니다.</h3>
 					<div className="splash__content__count__invite-only">INVITE ONLY</div>
 				</div>
 				<div className="splash__content__screenshot">
