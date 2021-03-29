@@ -2,8 +2,8 @@ import { useState } from 'react';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
 
-import { Button } from './Button';
-import { Input } from './Input';
+import { Button } from '@/components/Common/Button';
+import { Input } from '@/components/Common/Input';
 
 export const PhoneAuthForm = () => {
   const [phoneNumber, setPhoneNumber] = useState<string>('');
@@ -18,6 +18,7 @@ export const PhoneAuthForm = () => {
     <Container>
       <Input
         label="전화번호"
+        type="number"
         placeholder="먼저 전화번호 인증이 필요해요."
         value={phoneNumber}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
@@ -27,6 +28,7 @@ export const PhoneAuthForm = () => {
       {isAuthCodeSent && (
         <Input
           label="인증번호"
+          type="number"
           placeholder="휴대폰으로 전송된 4자리 인증번호를 입력해주세요."
           value={authCode}
           onChange={(event: React.ChangeEvent<HTMLInputElement>) =>

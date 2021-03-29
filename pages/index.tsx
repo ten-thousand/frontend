@@ -2,7 +2,7 @@ import React from 'react';
 import styled from 'styled-components';
 
 import { InvitationStatus } from '@/components/Home/InvitationStatus';
-import { PhoneAuthForm } from '@/components/Home/PhoneAuth/PhoneAuthForm';
+import { PhoneAuthForm } from '@/components/Home/PhoneAuthForm';
 
 const HomePage = () => {
   return (
