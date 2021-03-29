@@ -11,11 +11,23 @@ export const Button = styled.button<Props>`
   font-weight: bold;
   font-size: 1.05rem;
   width: 100%;
+  transition: background-color 0.25s ease-in-out;
 
   ${({ primary, ready = true }) =>
     primary &&
     css`
-      background-color: ${ready ? '#212529' : '#343a40'};
       color: rgba(255, 255, 255, 0.95);
+
+      ${ready
+        ? css`
+            background-color: #212529;
+
+            &:hover {
+              background-color: #111214;
+            }
+          `
+        : css`
+            background-color: #343a40;
+          `}
     `};
 `;
