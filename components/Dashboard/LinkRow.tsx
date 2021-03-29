@@ -1,7 +1,9 @@
 import React from 'react';
+import { toast } from 'react-toastify';
 import styled from 'styled-components';
 
 import { Button } from '@/components/Common/Button';
+import { copyToClipboard } from '@/utils/clipboard';
 
 type Props = {
   label: string;
@@ -14,7 +16,14 @@ export const LinkRow: React.FC<Props> = ({ label, value }) => {
       <Label>{label}</Label>
       <Container>
         <Input value={value} />
-        <CopyButton>복사</CopyButton>
+        <CopyButton
+          onClick={() => {
+            copyToClipboard(value);
+            toast('클립보드에 초대장 링크를 복사했습니다!');
+          }}
+        >
+          복사
+        </CopyButton>
       </Container>
     </Wrapper>
   );
