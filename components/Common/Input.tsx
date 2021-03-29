@@ -28,7 +28,7 @@ export const Input: React.FC<Props> = ({
 const Container = styled.div`
   display: flex;
   flex-direction: column;
-  margin: 16px 0;
+  margin: 8px 0;
 `;
 
 const Label = styled.label`

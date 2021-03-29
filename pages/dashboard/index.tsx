@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import { Button } from '@/components/Common/Button';
 import { MessageBanner } from '@/components/Common/MessageBanner';
+import { ScreenContainer } from '@/components/Common/ScreenContainer';
 import { InvitationStatus } from '@/components/Dashboard/InvitationStatus';
 import { LinkRow } from '@/components/Dashboard/LinkRow';
 
@@ -33,44 +34,24 @@ const DashboardPage = () => {
   };
 
   return (
-    <Wrapper>
-      <Container>
-        <MessageBanner>📮 초대장이 8장 남았습니다.</MessageBanner>
-        <InvitationStatus />
-        <LinkList>
-          {inviteLinks.map(({ id, link }, index) => (
-            <LinkRow
-              key={id}
-              label={`🙌 초대 링크 ${index + 1}`}
-              value={link}
-            />
-          ))}
-        </LinkList>
-        {canAddLink && (
-          <AddLinkButton primary onClick={onClickAddLink}>
-            링크 추가하기
-          </AddLinkButton>
-        )}
-      </Container>
-    </Wrapper>
+    <ScreenContainer>
+      <MessageBanner>📮 초대장이 8장 남았습니다.</MessageBanner>
+      <InvitationStatus />
+      <LinkList>
+        {inviteLinks.map(({ id, link }, index) => (
+          <LinkRow key={id} label={`🙌 초대 링크 ${index + 1}`} value={link} />
+        ))}
+      </LinkList>
+      {canAddLink && (
+        <AddLinkButton primary onClick={onClickAddLink}>
+          링크 추가하기
+        </AddLinkButton>
+      )}
+    </ScreenContainer>
   );
 };
 
 export default DashboardPage;
-
-const Wrapper = styled.div`
-  min-height: 100vh;
-  background-color: #f8f9fa;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-`;
-
-const Container = styled.div`
-  width: 420px;
-  margin: 0 auto;
-  margin-bottom: 64px;
-`;
 
 const LinkList = styled.ul`
   width: 100%;

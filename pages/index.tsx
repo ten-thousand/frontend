@@ -6,8 +6,22 @@ const LandingPage = () => {
   // TODO: implement landing page
   return (
     <Container>
-      {/* FIXME: remove helper link */}
-      <Link href="/dashboard">{'/dashboard'}</Link>
+      {/* FIXME: remove example helper links */}
+      <ul
+        style={{
+          marginTop: 32,
+          listStyleType: 'disc',
+        }}
+      >
+        <li>
+          <Link href="/dashboard">{'/dashboard'}</Link>
+        </li>
+        <li>
+          <Link href="/referral/jHQdaiS/oAsdUUid">
+            {'/referral/jHQdaiS/oAsdUUid'}
+          </Link>
+        </li>
+      </ul>
     </Container>
   );
 };
