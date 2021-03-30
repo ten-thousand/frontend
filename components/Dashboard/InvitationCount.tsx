@@ -1,9 +1,13 @@
 import React from 'react';
 import styled from 'styled-components';
 
-export const InvitationCount: React.FC = ({ count }) => {
-  const scale = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
+const scale = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
+type Props = {
+  count: number;
+};
+
+export const InvitationCount: React.FC<Props> = ({ count }) => {
   return (
     <Container>
       <Bar>
@@ -12,7 +16,9 @@ export const InvitationCount: React.FC = ({ count }) => {
       </Bar>
       <Scale>
         {scale.map((num, index) => (
-          <ScaleNumber isActive={num == count}>{num}</ScaleNumber>
+          <ScaleNumber key={index} isActive={num === count}>
+            {num}
+          </ScaleNumber>
         ))}
       </Scale>
     </Container>
@@ -29,16 +35,18 @@ const Bar = styled.div`
   height: 6px;
 `;
 
-const BarActive = styled.div`
+type BarActiveProps = {
+  count: number;
+};
+const BarActive = styled.div<BarActiveProps>`
   position: absolute;
   top: 0;
   left: 0;
   z-index: 200;
-
-  width: ${props => `${props.count * 10}`}%;
   height: 8px;
   border-radius: 8px;
   background: linear-gradient(90deg, #976eee 0%, #a053e2 54.17%, #0ca295 100%);
+  width: ${(props) => `${props.count * 10}`}%;
 `;
 
 const BarBase = styled.div`
@@ -55,11 +63,14 @@ const Scale = styled.div`
   margin: 16px 0 0 0;
 `;
 
-const ScaleNumber = styled.span`
+type ScaleNumberProps = {
+  isActive: boolean;
+};
+const ScaleNumber = styled.span<ScaleNumberProps>`
   font-size: 14px;
   line-height: 14px;
   font-weight: 400;
   color: #ffffff;
-  opacity: ${props => props.isActive ? 1 : 0.4};
-  font-weight: ${props => props.isActive ? 600 : 400};
+  opacity: ${(props) => (props.isActive ? 1 : 0.4)};
+  font-weight: ${(props) => (props.isActive ? 600 : 400)};
 `;

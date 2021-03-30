@@ -86,9 +86,12 @@ const Label = styled.label`
   // outline: 1px solid red;
 `;
 
-const RefLink = styled.div`
+type RefLinkProps = {
+  isUsed?: boolean;
+};
+const RefLink = styled.div<RefLinkProps>`
   display: flex;
-  justify-content: ${props => (props.isUsed ? 'center' : 'flex-end')};
+  justify-content: ${(props) => (props.isUsed ? 'center' : 'flex-end')};
   flex: 0 1 auto;
   max-width: 261px;
   padding: 2px 0 0 0;
@@ -98,14 +101,17 @@ const RefLink = styled.div`
   max-height: 18px;
 `;
 
-const RefLinkText = styled.h4`
+type RefLinkTextProps = {
+  isUsed?: boolean;
+};
+const RefLinkText = styled.h4<RefLinkTextProps>`
   height: 16px;
   margin: 0;
   font-size: 16px;
   line-height: 16px;
   font-weight: 400;
   text-align: right;
-  color: ${props => (props.isUsed ? 'rgba(255, 255, 255, 0.5)' : '#ffffff')};
+  color: ${(props) => (props.isUsed ? 'rgba(255, 255, 255, 0.5)' : '#ffffff')};
   white-space: nowrap;
   overflow: hidden;
   opacity: 0.8;
@@ -114,7 +120,6 @@ const RefLinkText = styled.h4`
 type CopyButtonProps = {
   isUsed: boolean;
 };
-
 const CopyButton = styled(Button)<CopyButtonProps>`
   flex: 0 101px;
   width: 101px;
@@ -123,10 +128,10 @@ const CopyButton = styled(Button)<CopyButtonProps>`
   padding: 15px 0;
   font-size: 15px;
   line-height: 18px;
-  font-weight: ${props => (props.isUsed ? 400 : 600)};
-  background-color: ${props =>
+  font-weight: ${(props) => (props.isUsed ? 400 : 600)};
+  background-color: ${(props) =>
     props.isUsed ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.2)'};
-  color: ${props =>
+  color: ${(props) =>
     props.isUsed ? 'rgba(255, 255, 255, 0.4)' : 'rgba(255, 255, 255, 1)'};
 
   ${({ isUsed }) =>
