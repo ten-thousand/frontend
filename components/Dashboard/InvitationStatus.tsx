@@ -28,6 +28,7 @@ const NumberOfPeopleJoined = styled.span`
   font-size: 128px;
   line-height: 128px;
   font-weight: 200;
+  color: #ffffff;
 
   span {
     margin: 0 0 0 10px;
@@ -48,4 +49,5 @@ const TotalNumberOfInvitations = styled.span`
   line-height: 24px;
   font-weight: 400;
   opacity: 0.5;
+  color: #ffffff;
 `;

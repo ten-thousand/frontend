@@ -14,9 +14,22 @@ type Props = {
 export const LinkRow: React.FC<Props> = ({ label, value, isUsed }) => {
   return (
     <Wrapper>
-      <Label>{label}</Label>
       <Container>
-        <Input value={value} />
+        <ContainerLink>
+          <Label>{label}</Label>
+          <RefLink isUsed={isUsed}>
+            <RefLinkText isUsed={isUsed}>
+              {isUsed ? (
+                '01030627978'
+              ) : (
+                <>
+                  <span style={{ fontSize: 0 }}>{`https://`}</span>
+                  {value.split('//')[1]}
+                </>
+              )}
+            </RefLinkText>
+          </RefLink>
+        </ContainerLink>
         <CopyButton
           onClick={() => {
             if (isUsed) {
@@ -27,9 +40,11 @@ export const LinkRow: React.FC<Props> = ({ label, value, isUsed }) => {
           }}
           isUsed={isUsed}
         >
-          복사
+          {isUsed ? '초대완료' : '복사'}
         </CopyButton>
-        {isUsed && <UsedLabel>THIS INVITATION IS ALREADY USED</UsedLabel>}
+        {isUsed && false && (
+          <UsedLabel>THIS INVITATION IS ALREADY USED</UsedLabel>
+        )}
       </Container>
     </Wrapper>
   );
@@ -38,27 +53,62 @@ export const LinkRow: React.FC<Props> = ({ label, value, isUsed }) => {
 const Wrapper = styled.ul`
   display: flex;
   flex-direction: column;
-  margin: 16px 0 24px;
-`;
-
-const Label = styled.label`
-  font-weight: 500;
-  margin-bottom: 8px;
+  margin: 20px 0;
 `;
 
 const Container = styled.div`
   display: flex;
   position: relative;
+  max-width: 100%;
 `;
 
-const Input = styled.input`
+const ContainerLink = styled.div`
+  max-width: 100%;
   flex: 1;
-  padding: 16px 18px;
-  margin-right: 8px;
+  width: calc(100% - 101px - 12px);
+  display: flex;
+  flex-direction: row;
+  margin: 0 12px 0 0;
+  padding: 15px 12px 15px 18px;
+  background: rgba(234, 174, 255, 0.08);
   border-radius: 8px;
-  font-size: 1.05rem;
-  background-color: #f1f3f5;
-  border: 1px solid #dee2e6;
+`;
+
+const Label = styled.label`
+  flex: 0 40px;
+  margin: 0 12px 0 0;
+  font-weight: 600;
+  color: #ffffff;
+
+  overflow: hidden;
+  height: 18px;
+  max-height: 18px;
+  // outline: 1px solid red;
+`;
+
+const RefLink = styled.div`
+  display: flex;
+  justify-content: ${props => (props.isUsed ? 'center' : 'flex-end')};
+  flex: 0 1 auto;
+  max-width: 261px;
+  padding: 2px 0 0 0;
+  background: none;
+  overflow: hidden;
+  height: 18px;
+  max-height: 18px;
+`;
+
+const RefLinkText = styled.h4`
+  height: 16px;
+  margin: 0;
+  font-size: 16px;
+  line-height: 16px;
+  font-weight: 400;
+  text-align: right;
+  color: ${props => (props.isUsed ? 'rgba(255, 255, 255, 0.5)' : '#ffffff')};
+  white-space: nowrap;
+  overflow: hidden;
+  opacity: 0.8;
 `;
 
 type CopyButtonProps = {
@@ -66,20 +116,24 @@ type CopyButtonProps = {
 };
 
 const CopyButton = styled(Button)<CopyButtonProps>`
-  width: 82px;
+  flex: 0 101px;
+  width: 101px;
+  min-width: 101px;
   height: 100%;
-  padding: 16px 0;
-  font-size: 1.05rem;
-  font-weight: 500;
-  border: 1px solid #dee2e6;
-  background-color: #dee2e6;
-  color: rgba(0, 0, 0, 0.65);
+  padding: 15px 0;
+  font-size: 15px;
+  line-height: 18px;
+  font-weight: ${props => (props.isUsed ? 400 : 600)};
+  background-color: ${props =>
+    props.isUsed ? 'rgba(255, 255, 255, 0.05)' : 'rgba(0, 0, 0, 0.2)'};
+  color: ${props =>
+    props.isUsed ? 'rgba(255, 255, 255, 0.4)' : 'rgba(255, 255, 255, 1)'};
 
   ${({ isUsed }) =>
     !isUsed
       ? css`
           &:hover {
-            background-color: #ced4da;
+            background-color: rgba(0, 0, 0, 0.4);
           }
         `
       : css`

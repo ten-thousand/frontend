@@ -91,7 +91,7 @@ export const PhoneAuthForm: React.FC<Props> = ({ onClickJoin }) => {
               onClickJoin({ username, phoneNumber, authCode });
             }}
           >
-            가입하기
+            렛츠기릿!
           </Button>
         )}
       </ButtonWrapper>
