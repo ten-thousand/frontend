@@ -4,8 +4,10 @@ import styled from 'styled-components';
 
 import { Button } from '@/components/Common/Button';
 import { Input } from '@/components/Common/Input';
+import { Client } from '@/utils/client';
 
 type Props = {
+  inviteCode: string;
   onClickJoin: ({
     username,
     phoneNumber,
@@ -17,7 +19,7 @@ type Props = {
   }) => void;
 };
 
-export const PhoneAuthForm: React.FC<Props> = ({ onClickJoin }) => {
+export const PhoneAuthForm: React.FC<Props> = ({ inviteCode, onClickJoin }) => {
   const [username, setUsername] = useState<string>('');
   const [phoneNumber, setPhoneNumber] = useState<string>('');
 
@@ -26,7 +28,41 @@ export const PhoneAuthForm: React.FC<Props> = ({ onClickJoin }) => {
 
   const canSendAuthCode = !!phoneNumber;
   const canCheckAuthCode = !!authCode;
-  const canJoin = canCheckAuthCode && !!username;
+
+  const onClickSendAuthCode = async () => {
+    if (!canSendAuthCode) {
+      toast('전화번호를 입력해 주세요!');
+      return;
+    }
+    toast.dismiss();
+
+    try {
+      const { data } = await Client.post('/user', {
+        phoneNumber: phoneNumber,
+        userName: username,
+        inviteCode,
+      });
+
+      if (data.ok) {
+        // Success
+        setAuthCodeSent(true);
+        toast('🚀 인증번호가 발송되었습니다!');
+        return;
+      }
+      if (data.message === 'InviteCodeRequiredException') {
+        toast('초대 코드가 필요해요!');
+      } else if (data.message === 'UserNameRequiredException') {
+        toast('신규 유저라면 사용자 이름을 입력해주셔야 해요!');
+      } else if (data.message === 'NotValidInviteCodeException') {
+        toast('사용할 수 없는 링크로 오셨어요. 죄송해요😭');
+      } else if (data.message === 'UnknownCannotLoginException') {
+        toast('알 수 없는 에러가 발생했어요. 조금 뒤에 다시 시도해 주세요! 🙏');
+      }
+    } catch (error) {
+      console.log(error);
+      toast('서버 에러가 발생했어요. 잠시 뒤에 다시 사용해 주세요. 🙏');
+    }
+  };
 
   return (
     <>
@@ -60,18 +96,7 @@ export const PhoneAuthForm: React.FC<Props> = ({ onClickJoin }) => {
       )}
       <ButtonWrapper>
         {!isAuthCodeSent ? (
-          <Button
-            primary
-            ready={canSendAuthCode}
-            onClick={() => {
-              if (!canSendAuthCode) {
-                toast('전화번호를 입력해 주세요!');
-                return;
-              }
-              toast.dismiss();
-              setAuthCodeSent(true);
-            }}
-          >
+          <Button primary ready={canSendAuthCode} onClick={onClickSendAuthCode}>
             인증번호 받기
           </Button>
         ) : (
@@ -81,10 +106,6 @@ export const PhoneAuthForm: React.FC<Props> = ({ onClickJoin }) => {
             onClick={() => {
               if (!canCheckAuthCode) {
                 toast('인증번호를 입력해 주세요!');
-                return;
-              }
-              if (!canJoin) {
-                toast('사용자 이름을 입력해 주세요!');
                 return;
               }
               toast.dismiss();

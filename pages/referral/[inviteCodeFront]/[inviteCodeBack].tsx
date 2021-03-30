@@ -1,10 +1,22 @@
+import { useRouter } from 'next/router';
+import { useMemo } from 'react';
+import { toast } from 'react-toastify';
+
 import { MessageBanner } from '@/components/Common/MessageBanner';
 import { ScreenContainer } from '@/components/Common/ScreenContainer';
 import { InvitationStatus } from '@/components/Dashboard/InvitationStatus';
 import { PhoneAuthForm } from '@/components/Referral/PhoneAuthForm';
+import { API_URL, Client } from '@/utils/client';
 
 const ReferralPage = () => {
-  const onClickJoin = ({
+  const router = useRouter();
+  const { inviteCodeFront, inviteCodeBack } = router.query;
+  const inviteCode = useMemo(() => `${inviteCodeFront}/${inviteCodeBack}`, [
+    inviteCodeFront,
+    inviteCodeBack,
+  ]);
+
+  const onClickJoin = async ({
     username,
     phoneNumber,
     authCode,
@@ -18,9 +30,11 @@ const ReferralPage = () => {
 
   return (
     <ScreenContainer>
-      <MessageBanner>📮 @jayhxmo님이 초대해주셨네요! 🎉 축하드려요!</MessageBanner>
+      <MessageBanner>
+        📮 @jayhxmo님이 초대해주셨네요! 🎉 축하드려요!
+      </MessageBanner>
       <InvitationStatus />
-      <PhoneAuthForm onClickJoin={onClickJoin} />
+      <PhoneAuthForm inviteCode={inviteCode} onClickJoin={onClickJoin} />
     </ScreenContainer>
   );
 };
