@@ -1,3 +1,4 @@
+import parsePhoneNumber from 'libphonenumber-js';
 import { useState } from 'react';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
@@ -31,14 +32,30 @@ export const PhoneAuthForm: React.FC<Props> = ({ inviteCode, onClickJoin }) => {
 
   const onClickSendAuthCode = async () => {
     if (!canSendAuthCode) {
-      toast('전화번호를 입력해 주세요!');
+      toast('전화번호를 입력해주세요!');
       return;
     }
     toast.dismiss();
 
+    let phoneNumberWithLocale = phoneNumber;
+    if (!phoneNumber.startsWith('+82')) {
+      phoneNumberWithLocale = '+82' + phoneNumber;
+      setPhoneNumber('+82' + phoneNumber);
+    }
+
+    let parsedPhoneNumber = phoneNumberWithLocale;
+    try {
+      const parsed = parsePhoneNumber(phoneNumberWithLocale, 'KR');
+      parsedPhoneNumber = parsed.number as string;
+      setPhoneNumber(parsedPhoneNumber);
+    } catch (error) {
+      toast('올바른 형식의 전화번호를 입력해주세요!');
+      return;
+    }
+
     try {
       const { data } = await Client.post('/user', {
-        phoneNumber: phoneNumber,
+        phoneNumber: parsedPhoneNumber,
         userName: username,
         inviteCode,
       });
@@ -76,7 +93,6 @@ export const PhoneAuthForm: React.FC<Props> = ({ inviteCode, onClickJoin }) => {
       />
       <Input
         label="📨 문자 인증이 필요해요."
-        type="number"
         placeholder="인증받을 핸드폰 번호를 입력해주세요!"
         value={phoneNumber}
         onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
