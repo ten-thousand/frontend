@@ -2,6 +2,8 @@ import { useEffect, useState } from 'react';
 
 import { Client } from '@/utils/client';
 
+const MAX_USER_COUNT = 10000;
+
 export const useUserCount = () => {
   const [count, setCount] = useState<string>('0');
 
@@ -13,7 +15,9 @@ export const useUserCount = () => {
             data: { user: userCount },
           },
         } = await Client.get('/core');
-        setCount(userCount.toString());
+        setCount(
+          userCount > MAX_USER_COUNT ? MAX_USER_COUNT : userCount.toString(),
+        );
       } catch (error) {
         console.log(error);
         setCount('-');
