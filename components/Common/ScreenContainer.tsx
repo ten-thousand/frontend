@@ -23,7 +23,7 @@ const Container = styled.div`
   }
 `;
 
-export const ScreenContainer: React.FC<Props> = ({ children }) => {
+export const ScreenContainer: React.FC = ({ children }) => {
   return (
     <Screen>
       <Container>{children}</Container>
