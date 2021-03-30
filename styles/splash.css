@@ -17,6 +17,7 @@
 	background: url(/background.jpg) no-repeat center center;
 	background-size: cover;
 	text-align: center;
+	overflow: hidden;
 }
 
 .splash__content {
@@ -86,6 +87,7 @@
 
 .splash__content__screenshot__img {
 	width: 19.375vw;
+	height: calc(19.375vw * 2.164874552);
 	box-shadow: 0px 40px 50px 0px #13062e 26%;
 }
 
@@ -105,6 +107,7 @@
 
 	.splash__content__screenshot__img {
 		width: 33vw;
+		height: calc(33vw * 2.164874552);
 	}
 }
 
@@ -121,5 +124,6 @@
 
 	.splash__content__screenshot__img {
 		width: 50vw;
+		height: calc(50vw * 2.164874552);
 	}
 }
