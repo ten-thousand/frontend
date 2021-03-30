@@ -1,11 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 
+import { useUserCount } from '@/hooks/useUserCount';
+
 export const InvitationStatus: React.FC = () => {
+  const count = useUserCount();
+
   return (
     <Container>
       <NumberOfPeopleJoined>
-        7912<span>명</span>
+        {count}
+        <span>명</span>
       </NumberOfPeopleJoined>
       <TotalNumberOfInvitations>/ 10000</TotalNumberOfInvitations>
     </Container>
