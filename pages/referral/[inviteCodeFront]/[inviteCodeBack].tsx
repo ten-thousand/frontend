@@ -16,10 +16,9 @@ const ReferralPage = () => {
       !inviteCodeFront ? undefined : `${inviteCodeFront}/${inviteCodeBack}`,
     [inviteCodeFront, inviteCodeBack],
   );
-  const [
-    verificationIndentifier,
-    setVerificationIndentifier,
-  ] = useState<string>('');
+  const [verificationIdentifier, setVerificationIdentifier] = useState<string>(
+    '',
+  );
 
   useEffect(() => {
     if (!inviteCode) {
@@ -47,15 +46,16 @@ const ReferralPage = () => {
     authCode: string;
   }) => {
     console.log({
-      verificationIndentifier,
+      verificationIdentifier,
       verificationCode,
     });
     const { data } = await Client.post('/user/confirmation', {
-      verificationIndentifier,
+      verificationIdentifier,
       verificationCode,
     });
 
     if (data.ok) {
+      // FIXME: TOKEN HERE
       console.log(data.data.token);
       return;
     }
@@ -72,7 +72,7 @@ const ReferralPage = () => {
       <InvitationStatus />
       <PhoneAuthForm
         inviteCode={inviteCode}
-        setVerificationIndentifier={setVerificationIndentifier}
+        setVerificationIdentifier={setVerificationIdentifier}
         onClickJoin={onClickJoin}
       />
     </ScreenContainer>

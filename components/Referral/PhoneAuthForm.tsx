@@ -9,7 +9,7 @@ import { Client } from '@/utils/client';
 
 type Props = {
   inviteCode: string;
-  setVerificationIndentifier: (value: string) => void;
+  setVerificationIdentifier: (value: string) => void;
   onClickJoin: ({
     username,
     phoneNumber,
@@ -23,7 +23,7 @@ type Props = {
 
 export const PhoneAuthForm: React.FC<Props> = ({
   inviteCode,
-  setVerificationIndentifier,
+  setVerificationIdentifier,
   onClickJoin,
 }) => {
   const [username, setUsername] = useState<string>('');
@@ -69,11 +69,8 @@ export const PhoneAuthForm: React.FC<Props> = ({
         // Success
         setAuthCodeSent(true);
         toast('🚀 인증번호가 발송되었습니다!');
-        console.log(
-          'verificationIndentifier',
-          data.data.verificationIndentifier,
-        );
-        setVerificationIndentifier(data.data.verificationIndentifier);
+        console.log('verificationIdentifier', data.data.verificationIdentifier);
+        setVerificationIdentifier(data.data.verificationIdentifier);
         return;
       }
       if (data.message === 'InviteCodeRequiredException') {
