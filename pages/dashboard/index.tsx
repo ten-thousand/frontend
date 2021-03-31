@@ -103,21 +103,3 @@ const LinkList = styled.ul`
 `;
 
 const AddLinkButton = styled(Button)``;
-
-const EXAMPLE_LINKS: InviteLink[] = [
-  {
-    id: uuidv4(),
-    link: 'https://loooo.app/referral/jHQdaiS/oAsdUUid',
-    isUsed: true,
-  },
-  {
-    id: uuidv4(),
-    link: 'https://loooo.app/referral/jHQdaiS/oAsdUUidffffffff',
-    isUsed: false,
-  },
-].concat(
-  Array(8).fill({
-    id: uuidv4(),
-    link: 'https://loooo.app/referral/jHQdaiS/oAsdUUid',
-  }),
-);
