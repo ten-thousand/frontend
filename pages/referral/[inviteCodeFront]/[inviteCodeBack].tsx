@@ -1,5 +1,6 @@
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
+import { useCookies } from 'react-cookie';
 import { toast } from 'react-toastify';
 
 import { MessageBanner } from '@/components/Common/MessageBanner';
@@ -10,6 +11,12 @@ import { API_URL, Client } from '@/utils/client';
 
 const ReferralPage = () => {
   const router = useRouter();
+  const [cookies, setCookie] = useCookies(['x-tenthousand-token']);
+
+  if (cookies['x-tenthousand-token']) {
+    router.push('/dashboard');
+  }
+
   const { inviteCodeFront, inviteCodeBack } = router.query;
   const inviteCode = useMemo<string | undefined>(
     () =>
@@ -56,7 +63,13 @@ const ReferralPage = () => {
 
     if (data.ok) {
       // FIXME: TOKEN HERE
-      console.log(data.data.token);
+      const token = data.data.token;
+      console.log('token', token);
+      setCookie('x-tenthousand-token', token, {
+        path: '/',
+        maxAge: YEAR * 10,
+        sameSite: true,
+      });
       return;
     }
     if (data.message === 'VerificationFailedException') {
@@ -80,3 +93,5 @@ const ReferralPage = () => {
 };
 
 export default ReferralPage;
+
+const YEAR = 365 * 24 * 60 * 60;

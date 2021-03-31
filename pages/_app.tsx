@@ -5,6 +5,7 @@ import '@/styles/splash.css';
 import { AppProps } from 'next/app';
 import Router from 'next/router';
 import { useEffect } from 'react';
+import { CookiesProvider } from 'react-cookie';
 import { ToastContainer } from 'react-toastify';
 
 import { GlobalStyle } from '@/components/GlobalStyle';
@@ -23,7 +24,9 @@ function MyApp({ Component, pageProps }: AppProps) {
 
   return (
     <>
-      <Component {...pageProps} />
+      <CookiesProvider>
+        <Component {...pageProps} />
+      </CookiesProvider>
       <GlobalStyle />
       <ToastContainer position="top-center" autoClose={3 * SECOND} />
     </>

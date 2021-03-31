@@ -7,7 +7,7 @@ export const API_URL =
 const CustomAxios = axios.create({ baseURL: API_URL });
 
 export const Client = {
-  get: (url) => CustomAxios.get(url),
+  get: (url, options?: object) => CustomAxios.get(url, options),
   post: (url: string, data: object) => {
     // const formData = new FormData();
     // Object.entries(data).forEach(([key, value]) => formData.append(key, value));
