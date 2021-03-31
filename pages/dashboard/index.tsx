@@ -1,30 +1,48 @@
 import React, { useEffect, useMemo, useState } from 'react';
+import { toast } from 'react-toastify';
 import styled from 'styled-components';
 import { v4 as uuidv4 } from 'uuid';
 
 import { Button } from '@/components/Common/Button';
-import { MessageBanner } from '@/components/Common/MessageBanner';
 import { ScreenContainer } from '@/components/Common/ScreenContainer';
+import { InvitationCount } from '@/components/Dashboard/InvitationCount';
 import { InvitationStatus } from '@/components/Dashboard/InvitationStatus';
 import { LinkRow } from '@/components/Dashboard/LinkRow';
-
 import { Section } from '@/components/Dashboard/Section';
 import { SectionHeader } from '@/components/Dashboard/SectionHeader';
-import { InvitationCount } from '@/components/Dashboard/InvitationCount';
-
-type InviteLink = {
-  id: string;
-  link: string;
-  isUsed?: boolean;
-};
+import { UserReferral as InviteLink, useUserInformation } from '@/hooks/useUserInformation';
 
 const DashboardPage = () => {
-  const allLinks = useMemo<InviteLink[]>(() => EXAMPLE_LINKS, []);
   const [nextLinkIndex, setNextLinkIndex] = useState<number>(0);
   const [inviteLinks, setInviteLinks] = useState<InviteLink[]>([]);
 
+  const [userInformation, error] = useUserInformation();
+  const allLinks = useMemo(() => {
+    if (!userInformation) {
+      return [];
+    }
+    return userInformation.userReferrals;
+  }, [userInformation]);
+
   useEffect(() => {
-    const usedInviteLinks = allLinks.filter(v => v.isUsed);
+    if (!error) {
+      return;
+    }
+
+    if (error === 'RequestOrServerError') {
+      toast(
+        '서버 또는 네트워크 에러가 발생했어요. 잠시 뒤에 다시 사용해 주세요. 🙏',
+      );
+    } else {
+      toast('로그인 후에 확인할 수 있어요. 😇');
+    }
+  }, [error]);
+
+  useEffect(() => {
+    if (!allLinks.length) {
+      return;
+    }
+    const usedInviteLinks = allLinks.filter((v) => v.status === 'USED');
     if (usedInviteLinks.length) {
       setInviteLinks(usedInviteLinks);
       setNextLinkIndex(usedInviteLinks.length);
@@ -32,7 +50,7 @@ const DashboardPage = () => {
     }
     setInviteLinks([allLinks[0]]);
     setNextLinkIndex(1);
-  }, []);
+  }, [allLinks]);
 
   const canAddLink = nextLinkIndex > 0 && nextLinkIndex < allLinks.length;
 
@@ -45,7 +63,6 @@ const DashboardPage = () => {
 
   return (
     <ScreenContainer>
-      {/*<MessageBanner>📮 초대장이 8장 남았습니다.</MessageBanner>*/}
       <InvitationStatus />
       <Section>
         <SectionHeader>
@@ -60,12 +77,12 @@ const DashboardPage = () => {
           <h4>링크당 한 사람만 초대할 수 있어요.</h4>
         </SectionHeader>
         <LinkList>
-          {inviteLinks.map(({ id, link, isUsed }, index) => (
+          {inviteLinks.map(({ inviteCode, status }, index) => (
             <LinkRow
-              key={id}
+              key={inviteCode}
               label={`${index + 1}  🙌`}
-              value={link}
-              isUsed={isUsed}
+              value={`https://loooo.app/referral/${inviteCode}`}
+              isUsed={status === 'USED'}
             />
           ))}
         </LinkList>

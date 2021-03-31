@@ -46,6 +46,10 @@ const ReferralPage = () => {
     phoneNumber: string;
     authCode: string;
   }) => {
+    console.log({
+      verificationIndentifier,
+      verificationCode,
+    });
     const { data } = await Client.post('/user/confirmation', {
       verificationIndentifier,
       verificationCode,
@@ -53,6 +57,12 @@ const ReferralPage = () => {
 
     if (data.ok) {
       console.log(data.data.token);
+      return;
+    }
+    if (data.message === 'VerificationFailedException') {
+      toast('올바른 인증 코드가 아닙니다. 죄송해요😭');
+    } else if (data.message === 'CodeExpiredException') {
+      toast('인증 코드 입력 가능 시간이 지났어요. 🥲');
     }
   };
 

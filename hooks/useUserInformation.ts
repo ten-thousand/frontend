@@ -2,7 +2,7 @@ import { useEffect, useState } from 'react';
 
 import { Client } from '@/utils/client';
 
-type UserReferral = {
+export type UserReferral = {
   inviteCode: string;
   status: 'USED' | 'ISSUED';
   usedBy: { phoneNumber: string; userName: string };
