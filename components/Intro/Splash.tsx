@@ -1,7 +1,19 @@
+import React, { useEffect, useState } from 'react';
+import CountUp from 'react-countup';
+
 import { useUserCount } from '@/hooks/useUserCount';
+
+const SECOND = 1000;
 
 const Splash = () => {
   const count = useUserCount();
+  const [countEnd, setCountEnd] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (count) {
+      setTimeout(() => setCountEnd(count), 7 * SECOND);
+    }
+  }, [count]);
 
   return (
     <div className="splash">
@@ -14,8 +26,14 @@ const Splash = () => {
         </div>
         <div className="splash__content__count">
           <h1>
-            {count}
-            <span>명</span>
+            {countEnd ? (
+              <CountUp start={0} end={countEnd} delay={0}>
+                {({ countUpRef }) => <span ref={countUpRef} />}
+              </CountUp>
+            ) : (
+              '0'
+            )}
+            <span className="suffix">명</span>
           </h1>
           <h3>10000까지만 올라갑니다.</h3>
           <div className="splash__content__count__invite-only">INVITE ONLY</div>

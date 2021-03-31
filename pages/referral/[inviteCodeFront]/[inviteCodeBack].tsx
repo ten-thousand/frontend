@@ -8,7 +8,7 @@ import { MessageBanner } from '@/components/Common/MessageBanner';
 import { ScreenContainer } from '@/components/Common/ScreenContainer';
 import { InvitationStatus } from '@/components/Dashboard/InvitationStatus';
 import { PhoneAuthForm } from '@/components/Referral/PhoneAuthForm';
-import { API_URL, Client } from '@/utils/client';
+import { Client } from '@/utils/client';
 
 const ReferralPage = () => {
   const router = useRouter();
@@ -93,7 +93,8 @@ const ReferralPage = () => {
     <ScreenContainer>
       <FadeIn delay={0} transitionDuration={800} visible={!!invitedByUsername}>
         <MessageBanner>
-          {`📮 @${invitedByUsername}님이 초대해주셨네요! 🎉 축하드려요!`}
+          📮 <strong>{`@${invitedByUsername}`}</strong> 님이 초대해주셨네요! 🎉
+          축하드려요!
         </MessageBanner>
       </FadeIn>
       <InvitationStatus />

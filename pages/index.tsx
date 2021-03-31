@@ -6,7 +6,6 @@ import Clubhouse from '@/components/Intro/Clubhouse';
 import Splash from '@/components/Intro/Splash';
 
 const LandingPage = () => {
-  // TODO: implement landing page
   return (
     <Container>
       <Clubhouse />
