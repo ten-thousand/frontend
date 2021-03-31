@@ -34,6 +34,8 @@ export default class MyDocument extends Document {
     return (
       <Html>
         <Head>
+          <title>10000</title>
+          <meta name="description" content="10000까지만 올라갑니다." />
           {/* Google Tag Manager */}
           <script
             dangerouslySetInnerHTML={{
