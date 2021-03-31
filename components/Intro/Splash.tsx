@@ -1,11 +1,16 @@
+import router from 'next/router';
 import React, { useEffect, useState } from 'react';
 import CountUp from 'react-countup';
+import { toast } from 'react-toastify';
 
+import { useTokenInsideCookie } from '@/hooks/useTokenInsideCookie';
 import { useUserCount } from '@/hooks/useUserCount';
 
 const SECOND = 1000;
 
 const Splash = () => {
+  const token = useTokenInsideCookie();
+
   const count = useUserCount();
   const [countEnd, setCountEnd] = useState<number | null>(null);
 
@@ -36,7 +41,18 @@ const Splash = () => {
             <span className="suffix">명</span>
           </h1>
           <h3>10000까지만 올라갑니다.</h3>
-          <div className="splash__content__count__invite-only">INVITE ONLY</div>
+          <button
+            className="splash__content__count__invite-only"
+            onClick={() => {
+              if (token) {
+                router.push('/dashboard');
+              } else {
+                toast('초대장이 필요해요! 행운을 빕니다. 🤭');
+              }
+            }}
+          >
+            {token ? 'INVITE SOMEONE' : 'INVITE ONLY'}
+          </button>
         </div>
         <div className="splash__content__screenshot">
           <img
