@@ -1,7 +1,6 @@
 import React, { useEffect, useMemo, useState } from 'react';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
-import { v4 as uuidv4 } from 'uuid';
 
 import { Button } from '@/components/Common/Button';
 import { ScreenContainer } from '@/components/Common/ScreenContainer';
