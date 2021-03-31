@@ -33,12 +33,19 @@ const ReferralPage = () => {
     }
 
     const getData = async () => {
-      const { data } = await Client.post('/core/link', { inviteCode });
-      if (data.ok) {
-        return;
-      }
-      if (data.message === 'NotValidInviteCodeException') {
-        toast('올바른 초대 링크가 아닙니다. 죄송해요😭');
+      try {
+        const { data } = await Client.post('/core/link', { inviteCode });
+        if (data.ok) {
+          return;
+        }
+        if (data.message === 'NotValidInviteCodeException') {
+          toast('올바른 초대 링크가 아닙니다. 죄송해요😭');
+        }
+      } catch (error) {
+        console.log(error);
+        toast(
+          '서버 또는 네트워크 에러가 발생했어요. 잠시 뒤에 다시 사용해 주세요. 🙏',
+        );
       }
     };
 
