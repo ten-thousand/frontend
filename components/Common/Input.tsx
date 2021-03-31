@@ -6,6 +6,7 @@ type Props = React.HTMLAttributes<HTMLInputElement> & {
   label?: string;
   type?: string;
   value?: string;
+  helpText?: React.ReactNode;
   style?: React.CSSProperties;
 };
 
@@ -14,6 +15,7 @@ export const Input: React.FC<Props> = ({
   label,
   type,
   value,
+  helpText,
   style,
   ...inputProps
 }) => {
@@ -21,6 +23,7 @@ export const Input: React.FC<Props> = ({
     <Container className={className}>
       <Label>{label}</Label>
       <TextInput type={type} value={value} style={style} {...inputProps} />
+      {!!helpText && <HelpText>{helpText}</HelpText>}
     </Container>
   );
 };
@@ -59,4 +62,10 @@ const TextInput = styled.input`
   &::placeholder {
     color: rgba(255, 255, 255, 0.33);
   }
+`;
+
+const HelpText = styled.small`
+  color: rgba(255, 255, 255, 0.9);
+  font-size: 12.5px;
+  margin-top: 12px;
 `;

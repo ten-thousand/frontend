@@ -35,6 +35,8 @@ export const PhoneAuthForm: React.FC<Props> = ({
   const canSendAuthCode = !!phoneNumber;
   const canCheckAuthCode = !!authCode;
 
+  const onClickRefresh = () => location.reload();
+
   const onClickSendAuthCode = async () => {
     if (!canSendAuthCode) {
       toast('전화번호를 입력해주세요!');
@@ -109,15 +111,25 @@ export const PhoneAuthForm: React.FC<Props> = ({
         }
       />
       {isAuthCodeSent && (
-        <Input
-          label="인증번호"
-          type="number"
-          placeholder="휴대폰으로 전송된 4자리 인증번호를 입력해 주세요."
-          value={authCode}
-          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-            setAuthCode(event.target.value)
-          }
-        />
+        <>
+          <Input
+            label="인증번호"
+            type="number"
+            placeholder="휴대폰으로 전송된 4자리 인증번호를 입력해 주세요."
+            helpText={
+              <>
+                5분 내로 입력 ·{' '}
+                <RefreshHelpText onClick={onClickRefresh}>
+                  인증번호 재전송 및 수정
+                </RefreshHelpText>
+              </>
+            }
+            value={authCode}
+            onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+              setAuthCode(event.target.value)
+            }
+          />
+        </>
       )}
       <ButtonWrapper>
         {!isAuthCodeSent ? (
@@ -148,4 +160,9 @@ export const PhoneAuthForm: React.FC<Props> = ({
 const ButtonWrapper = styled.div`
   width: 100%;
   margin-top: 16px;
+`;
+
+const RefreshHelpText = styled.span`
+  text-decoration: underline;
+  cursor: pointer;
 `;
