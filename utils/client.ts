@@ -1,8 +1,7 @@
 import axios from 'axios';
 import qs from 'qs';
 
-export const API_URL =
-  'https://thingproxy.freeboard.io/fetch/http://3.36.237.214';
+export const API_URL = '/api';
 
 const CustomAxios = axios.create({ baseURL: API_URL });
 
