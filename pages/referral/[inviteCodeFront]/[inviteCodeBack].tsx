@@ -1,6 +1,7 @@
 import { useRouter } from 'next/router';
 import { useEffect, useMemo, useState } from 'react';
 import { useCookies } from 'react-cookie';
+import FadeIn from 'react-fade-in';
 import { toast } from 'react-toastify';
 
 import { MessageBanner } from '@/components/Common/MessageBanner';
@@ -12,6 +13,7 @@ import { API_URL, Client } from '@/utils/client';
 const ReferralPage = () => {
   const router = useRouter();
   const [cookies, setCookie] = useCookies(['x-tenthousand-token']);
+  const [invitedByUsername, setInvitedByUsername] = useState<string>('');
 
   if (cookies['x-tenthousand-token']) {
     router.push('/dashboard');
@@ -36,6 +38,7 @@ const ReferralPage = () => {
       try {
         const { data } = await Client.post('/core/link', { inviteCode });
         if (data.ok) {
+          setInvitedByUsername(data.data.userName);
           return;
         }
         if (data.message === 'NotValidInviteCodeException') {
@@ -88,7 +91,11 @@ const ReferralPage = () => {
 
   return (
     <ScreenContainer>
-      <MessageBanner>📮 초대장을 받았네요! 🎉 축하드려요!</MessageBanner>
+      <FadeIn delay={0} transitionDuration={800} visible={!!invitedByUsername}>
+        <MessageBanner>
+          {`📮 @${invitedByUsername}님이 초대해주셨네요! 🎉 축하드려요!`}
+        </MessageBanner>
+      </FadeIn>
       <InvitationStatus />
       <PhoneAuthForm
         inviteCode={inviteCode}
