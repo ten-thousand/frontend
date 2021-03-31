@@ -1,5 +1,11 @@
 import { createProxyMiddleware } from 'http-proxy-middleware';
 
+export const config = {
+  api: {
+    bodyParser: false,
+  },
+};
+
 export default createProxyMiddleware({
   target: 'http://3.36.237.214/',
   pathRewrite: { '^/api': '/' },
