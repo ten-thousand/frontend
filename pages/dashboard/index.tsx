@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router';
 import React, { useEffect, useMemo, useState } from 'react';
 import { toast } from 'react-toastify';
 import styled from 'styled-components';
@@ -12,6 +13,7 @@ import { SectionHeader } from '@/components/Dashboard/SectionHeader';
 import { UserReferral as InviteLink, useUserInformation } from '@/hooks/useUserInformation';
 
 const DashboardPage = () => {
+  const router = useRouter();
   const [nextLinkIndex, setNextLinkIndex] = useState<number>(0);
   const [inviteLinks, setInviteLinks] = useState<InviteLink[]>([]);
 
@@ -34,6 +36,7 @@ const DashboardPage = () => {
       );
     } else {
       toast('로그인 후에 확인할 수 있어요. 😇');
+      router.push('/referral/auth/login');
     }
   }, [error]);
 

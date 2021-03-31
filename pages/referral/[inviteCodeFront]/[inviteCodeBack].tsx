@@ -30,7 +30,13 @@ const ReferralPage = () => {
   );
 
   useEffect(() => {
+    // Loading router.query
     if (!inviteCode) {
+      return;
+    }
+
+    // Login route
+    if (inviteCode === 'auth/login') {
       return;
     }
 
