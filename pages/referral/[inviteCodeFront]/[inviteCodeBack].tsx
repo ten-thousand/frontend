@@ -1,5 +1,5 @@
 import { useRouter } from 'next/router';
-import { useMemo } from 'react';
+import { useEffect, useMemo } from 'react';
 import { toast } from 'react-toastify';
 
 import { MessageBanner } from '@/components/Common/MessageBanner';
@@ -15,6 +15,14 @@ const ReferralPage = () => {
     inviteCodeFront,
     inviteCodeBack,
   ]);
+
+  useEffect(() => {
+    const getData = async () => {
+      const { data } = await Client.post('/core/link', { inviteCode });
+    };
+
+    getData();
+  }, [inviteCode]);
 
   const onClickJoin = async ({
     username,
