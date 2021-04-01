@@ -75,7 +75,7 @@ const DashboardPage = () => {
       <Section>
         <SectionHeader>
           <h2>💌 보유한 초대장</h2>
-          <h4>가입자가 많아질수록 줄어들어요.</h4>
+          <h4>가입자가 많아질수록 사라져요.</h4>
         </SectionHeader>
         <InvitationCount count={invitationCount} />
       </Section>
