@@ -1,4 +1,10 @@
-import Document, { DocumentContext, Head, Html, Main, NextScript } from 'next/document';
+import Document, {
+  DocumentContext,
+  Head,
+  Html,
+  Main,
+  NextScript,
+} from 'next/document';
 import { ServerStyleSheet } from 'styled-components';
 
 import GoogleTagManager from '@/utils/GoogleTagManager';
@@ -11,8 +17,7 @@ export default class MyDocument extends Document {
     try {
       context.renderPage = () =>
         originalRenderPage({
-          enhanceApp: (App) => (props) =>
-            sheet.collectStyles(<App {...props} />),
+          enhanceApp: App => props => sheet.collectStyles(<App {...props} />),
         });
 
       const initialProps = await Document.getInitialProps(context);
@@ -43,7 +48,9 @@ export default class MyDocument extends Document {
                 dl=l!='dataLayer'?'&l='+l:'';j.async=true;
                 j.src='https://www.googletagmanager.com/gtm.js?id='+i+dl;
                 f.parentNode.insertBefore(j,f);
-                })(window,document,'script','dataLayer','${GoogleTagManager.id}');`,
+                })(window,document,'script','dataLayer','${
+                  GoogleTagManager.id
+                }');`,
             }}
           />
           {/* End Google Tag Manager */}
@@ -51,7 +58,9 @@ export default class MyDocument extends Document {
           <noscript
             dangerouslySetInnerHTML={{
               __html: `<iframe
-                  src="https://www.googletagmanager.com/ns.html?id=${GoogleTagManager.id}"
+                  src="https://www.googletagmanager.com/ns.html?id=${
+                    GoogleTagManager.id
+                  }"
                   height="0" width="0"
                   style="display:none;visibility:hidden">
                 </iframe>`,
@@ -62,6 +71,14 @@ export default class MyDocument extends Document {
         <body>
           <Main />
           <NextScript />
+          <noscript>
+            <iframe
+              src="https://www.googletagmanager.com/ns.html?id=GTM-K333VRK"
+              height="0"
+              width="0"
+              style="display:none;visibility:hidden"
+            />
+          </noscript>
         </body>
       </Html>
     );

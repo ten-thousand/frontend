@@ -41,7 +41,7 @@ const Splash = () => {
             <span className="suffix">명</span>
           </h1>
           <h3>10000까지만 올라갑니다.</h3>
-          <h5>지금은 Limited Beta입니다. 4월 5일에 앱스토어에서 만나요 👋</h5>
+          <h5>지금은 Limited Beta입니다.<br/>4월 5일에 앱스토어에서 만나요 👋</h5>
           <button
             className="splash__content__count__invite-only"
             onClick={() => {
