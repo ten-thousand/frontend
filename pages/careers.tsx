@@ -13,15 +13,15 @@ const Careers = () => {
               <br />
               지금은 Limited Beta로 출시 되어있습니다.
             </h3>
-            <Post href="mailto:work@loooo.app?subject=백엔드%20개발자">
+            <Post href="mailto:ooool@loooo.app?subject=백엔드%20개발자">
               <h5>백엔드 개발자</h5>
               <p>Node.js / 서울 강남구</p>
             </Post>
-            <Post href="mailto:work@loooo.app?subject=프론트엔드%20개발자">
+            <Post href="mailto:ooool@loooo.app?subject=프론트엔드%20개발자">
               <h5>프론트엔드 개발자</h5>
               <p>React Native / 서울 강남구</p>
             </Post>
-            <Post href="mailto:work@loooo.app?subject=프로덕트%20디자이너">
+            <Post href="mailto:ooool@loooo.app?subject=프로덕트%20디자이너">
               <h5>프로덕트 디자이너</h5>
               <p>서울 강남구</p>
             </Post>
