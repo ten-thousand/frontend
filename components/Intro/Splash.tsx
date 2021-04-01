@@ -1,28 +1,68 @@
-import { useEffect } from 'react';
-import { motion, useAnimation } from 'framer-motion';
+import router from 'next/router';
+import React, { useEffect, useState } from 'react';
+import CountUp from 'react-countup';
+import { toast } from 'react-toastify';
+
+import { useTokenInsideCookie } from '@/hooks/useTokenInsideCookie';
+import { useUserCount } from '@/hooks/useUserCount';
+
+const SECOND = 1000;
 
 const Splash = () => {
-	const count = 7568;
+  const token = useTokenInsideCookie();
 
-	return (
-		<div className="splash">
-			<div className="splash__content">
-				<div className="splash__content__screenshot">
-					<img className="splash__content__screenshot__img" src="/splash-1.png" />
-				</div>
-				<div className="splash__content__count">
-					<h1>
-						{count}<span>명</span>
-					</h1>
-					<h3>10000까지만 올라갑니다.</h3>
-					<div className="splash__content__count__invite-only">INVITE ONLY</div>
-				</div>
-				<div className="splash__content__screenshot">
-					<img className="splash__content__screenshot__img" src="/splash-2.png" />
-				</div>
-			</div>
-		</div>
-	);
+  const count = useUserCount();
+  const [countEnd, setCountEnd] = useState<number | null>(null);
+
+  useEffect(() => {
+    if (count) {
+      setTimeout(() => setCountEnd(count), 7 * SECOND);
+    }
+  }, [count]);
+
+  return (
+    <div className="splash">
+      <div className="splash__content">
+        <div className="splash__content__screenshot">
+          <img
+            className="splash__content__screenshot__img"
+            src="/splash-1.png"
+          />
+        </div>
+        <div className="splash__content__count">
+          <h1>
+            {countEnd ? (
+              <CountUp start={0} end={countEnd} delay={0}>
+                {({ countUpRef }) => <span ref={countUpRef} />}
+              </CountUp>
+            ) : (
+              '0'
+            )}
+            <span className="suffix">명</span>
+          </h1>
+          <h3>10000까지만 올라갑니다.</h3>
+          <button
+            className="splash__content__count__invite-only"
+            onClick={() => {
+              if (token) {
+                router.push('/dashboard');
+              } else {
+                toast('초대장이 필요해요! 행운을 빕니다. 🤭');
+              }
+            }}
+          >
+            {token ? 'INVITE SOMEONE' : 'INVITE ONLY'}
+          </button>
+        </div>
+        <div className="splash__content__screenshot">
+          <img
+            className="splash__content__screenshot__img"
+            src="/splash-2.png"
+          />
+        </div>
+      </div>
+    </div>
+  );
 };
 
 export default Splash;
