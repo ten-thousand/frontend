@@ -11,10 +11,10 @@ const Clubhouse = () => {
 	const animateScreenshotHat = useAnimation();
 
 	useEffect(() => {
-		animateContainer.start({
-			opacity: 0,
-			transition: { type: 'tween', duration: 1.25, delay: 0 },
-		});
+		// animateContainer.start({
+		// 	opacity: 0,
+		// 	transition: { type: 'tween', duration: 1.25, delay: 0 },
+		// });
 
 		animateReactions1.start({
 			opacity: 1,
@@ -31,10 +31,10 @@ const Clubhouse = () => {
 			transition: { type: 'tween', duration: 0.15, delay: 2.75 },
 		});
 
-		animateTitle.start({
-			opacity: 1,
-			transition: { type: 'tween', duration: 1.25, delay: 3.5 },
-		});
+		// animateTitle.start({
+		// 	opacity: 1,
+		// 	transition: { type: 'tween', duration: 1.25, delay: 3.5 },
+		// });
 
 		animateScreenshot.start({
 			opacity: 0.5,
