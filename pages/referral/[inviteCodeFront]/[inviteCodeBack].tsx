@@ -15,10 +15,12 @@ const ReferralPage = () => {
   const [cookies, setCookie] = useCookies(['x-tenthousand-token']);
   const [invitedByUsername, setInvitedByUsername] = useState<string>('');
 
-  if (cookies['x-tenthousand-token']) {
-    toast('이미 가입하셨네요! 다시 오신 걸 환영해요! 👍');
-    router.push('/dashboard');
-  }
+  useEffect(() => {
+    if (!cookies && cookies['x-tenthousand-token']) {
+      toast('이미 가입하셨네요! 다시 오신 걸 환영해요! 👍');
+      router.push('/dashboard');
+    }
+  }, []);
 
   const { inviteCodeFront, inviteCodeBack } = router.query;
   const inviteCode = useMemo<string | undefined>(
