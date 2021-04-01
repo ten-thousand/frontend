@@ -8,7 +8,6 @@ import Splash from '@/components/Intro/Splash';
 const LandingPage = () => {
   return (
     <Container>
-      <Clubhouse />
       <Splash />
     </Container>
   );

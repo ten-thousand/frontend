@@ -16,7 +16,7 @@ const Splash = () => {
 
   useEffect(() => {
     if (count) {
-      setTimeout(() => setCountEnd(count), 7 * SECOND);
+      setCountEnd(count);
     }
   }, [count]);
 
