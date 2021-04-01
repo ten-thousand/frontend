@@ -90,6 +90,7 @@ const ReferralPage = () => {
         maxAge: YEAR * 10,
         sameSite: true,
       });
+      router.push('/dashboard');
       return;
     }
     if (data.message === 'VerificationFailedException') {
