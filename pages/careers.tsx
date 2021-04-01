@@ -5,11 +5,27 @@ import styled from 'styled-components';
 const Careers = () => {
   return (
     <Container>
-      loooo는 4월 5일에 런칭 예정인 소셜 앱 입니다. 지금은 Limited Beta로 출시 되어있습니다.
-      <Post>
-        <h3>백엔드 개발자</h3>
-        <p>서울 강남구 / Node.js</p>
-      </Post>
+      <div className="splash">
+        <div className="splash-content">
+          <h3 style={{ lineHeight: 1.5 }}>
+            loooo. 4월 5일에 런칭 예정인 소셜 앱 입니다.
+            <br />
+            지금은 Limited Beta로 출시 되어있습니다.
+          </h3>
+          <Post href="mailto:work@loooo.app?subject=백엔드%20개발자">
+            <h5>백엔드 개발자</h5>
+            <p>Node.js / 서울 강남구</p>
+          </Post>
+          <Post href="mailto:work@loooo.app?subject=프론트엔드%20개발자">
+            <h5>프론트엔드 개발자</h5>
+            <p>React Native / 서울 강남구</p>
+          </Post>
+          <Post href="mailto:work@loooo.app?subject=프로덕트%20디자이너">
+            <h5>프로덕트 디자이너</h5>
+            <p>서울 강남구</p>
+          </Post>
+        </div>
+      </div>
     </Container>
   );
 };
@@ -18,16 +34,36 @@ export default Careers;
 
 const Container = styled.div`
   min-height: 100vh;
-  background-color: #f8f9fa;
   display: flex;
   flex-direction: column;
   align-items: center;
 `;
 
-const Post = styled.div`
-  min-height: 100vh;
+const Post = styled.a`
   background-color: #f8f9fa;
   display: flex;
-  flex-direction: column;
+  flex-direction: row;
   align-items: center;
+  justify-content: space-between;
+  border-radius: 8px;
+
+  margin: 16px 0 0 0;
+  padding: 28px 20px 26px 20px;
+
+  h5 {
+    margin: 0;
+    color: rgba(0, 0, 0, 0.75) !important;
+    line-height: 1;
+    font-weight: 600;
+  }
+
+  p {
+    margin: 0;
+    color: rgb(0, 0, 0, 0.5);
+    line-height: 1;
+  }
+
+  &:first-of-type {
+    margin-top: 48px;
+  }
 `;
