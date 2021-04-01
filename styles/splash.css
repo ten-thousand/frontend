@@ -115,6 +115,10 @@ h5.footnote {
 	color: #ffffff;
 }
 
+.careers__wrapper {
+	padding: 0 16px;
+}
+
 @media (max-width: 992px) {
 	.splash__content {
 		flex-direction: column;
@@ -136,6 +140,10 @@ h5.footnote {
 
 	.splash__careers {
 		position: relative;
+	}
+
+	.careers__wrapper h3 {
+		font-size: 20px;
 	}
 }
 

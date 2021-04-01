@@ -7,23 +7,25 @@ const Careers = () => {
     <Container>
       <div className="splash">
         <div className="splash-content">
-          <h3 style={{ lineHeight: 1.5 }}>
-            loooo. 4월 5일에 런칭 예정인 소셜 앱 입니다.
-            <br />
-            지금은 Limited Beta로 출시 되어있습니다.
-          </h3>
-          <Post href="mailto:work@loooo.app?subject=백엔드%20개발자">
-            <h5>백엔드 개발자</h5>
-            <p>Node.js / 서울 강남구</p>
-          </Post>
-          <Post href="mailto:work@loooo.app?subject=프론트엔드%20개발자">
-            <h5>프론트엔드 개발자</h5>
-            <p>React Native / 서울 강남구</p>
-          </Post>
-          <Post href="mailto:work@loooo.app?subject=프로덕트%20디자이너">
-            <h5>프로덕트 디자이너</h5>
-            <p>서울 강남구</p>
-          </Post>
+          <div className="careers__wrapper">
+            <h3 style={{ lineHeight: 1.5 }}>
+              loooo. 4월 5일에 런칭 예정인 소셜 앱 입니다.
+              <br />
+              지금은 Limited Beta로 출시 되어있습니다.
+            </h3>
+            <Post href="mailto:work@loooo.app?subject=백엔드%20개발자">
+              <h5>백엔드 개발자</h5>
+              <p>Node.js / 서울 강남구</p>
+            </Post>
+            <Post href="mailto:work@loooo.app?subject=프론트엔드%20개발자">
+              <h5>프론트엔드 개발자</h5>
+              <p>React Native / 서울 강남구</p>
+            </Post>
+            <Post href="mailto:work@loooo.app?subject=프로덕트%20디자이너">
+              <h5>프로덕트 디자이너</h5>
+              <p>서울 강남구</p>
+            </Post>
+          </div>
         </div>
       </div>
     </Container>
