@@ -27,6 +27,7 @@ export const InvitationStatus: React.FC = () => {
         <NumberOfPeopleJoinedSuffix>명</NumberOfPeopleJoinedSuffix>
       </NumberOfPeopleJoined>
       <TotalNumberOfInvitations>/ 10000</TotalNumberOfInvitations>
+      <h5 className="footnote">지금은 Limited Beta입니다.<br/>4월 5일에 앱스토어 런칭과 동시에 계정이 열립니다.</h5>
     </Container>
   );
 };

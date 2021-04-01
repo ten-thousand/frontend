@@ -44,12 +44,26 @@
 }
 
 .splash h3 {
-	margin: 32px 0 48px 0;
-	font-size: 24px;
-	line-height: 24px;
+	margin: 32px 0 16px 0;
+	font-size: 28px;
+	line-height: 28px;
 	font-weight: 400;
 	opacity: 0.8;
 	color: #ffffff;
+}
+
+.splash h5, h5.footnote {
+	margin: 24px 0 48px 0;
+	font-size: 16px;
+	line-height: 28px;
+	font-weight: 400;
+	opacity: 0.66;
+	color: #ffffff;
+	text-align: center;
+}
+
+h5.footnote {
+	margin: 32px 0 24px 0;
 }
 
 .splash__content__count__invite-only {
