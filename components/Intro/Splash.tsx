@@ -1,8 +1,8 @@
+import Link from 'next/Link';
 import router from 'next/router';
 import React, { useEffect, useState } from 'react';
 import CountUp from 'react-countup';
 import { toast } from 'react-toastify';
-import Link from 'next/Link';
 
 import { useTokenInsideCookie } from '@/hooks/useTokenInsideCookie';
 import { useUserCount } from '@/hooks/useUserCount';
@@ -47,21 +47,49 @@ const Splash = () => {
             <br />
             4월 5일에 앱스토어에서 만나요 👋
           </h5>
-          <button
-            className="splash__content__count__invite-only"
-            onClick={() => {
-              if (token) {
-                router.push('/dashboard');
-              } else {
-                toast('초대장이 필요해요! 행운을 빕니다. 🤭');
-              }
+          <div
+            style={{
+              display: 'flex',
+              flexDirection: 'column',
+              justifyContent: 'center',
+              alignItems: 'center',
             }}
           >
-            {token ? 'INVITE SOMEONE' : 'INVITE ONLY'}
-          </button>
+            <button
+              className="splash__content__count__invite-only"
+              onClick={() => {
+                if (token) {
+                  router.push('/dashboard');
+                } else {
+                  toast('초대장이 필요해요! 행운을 빕니다. 🤭');
+                }
+              }}
+            >
+              {token ? 'INVITE SOMEONE' : 'INVITE ONLY'}
+            </button>
+            {!token && (
+              <button
+                className="splash__content__count__invite-only"
+                onClick={() => {
+                  router.push('/referral/auth/login');
+                }}
+                style={{
+                  marginTop: 8,
+                  backgroundColor: 'rgba(255, 255, 255, 0.8)',
+                  color: '#512A72',
+                }}
+              >
+                LOGIN
+              </button>
+            )}
+          </div>
         </div>
         <div className="splash__careers">
-          <Link href="/careers">채용 공고</Link>
+          <Link href="/careers">
+            <span style={{ textDecoration: 'underline', cursor: 'pointer' }}>
+              채용 공고
+            </span>
+          </Link>
         </div>
         <div className="splash__content__screenshot">
           <img

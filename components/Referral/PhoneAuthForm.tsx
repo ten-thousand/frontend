@@ -94,14 +94,16 @@ export const PhoneAuthForm: React.FC<Props> = ({
 
   return (
     <>
-      <Input
-        label="👋 뭐라고 불러드릴까요?"
-        placeholder="사용할 이름을 입력해 주세요."
-        value={username}
-        onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
-          setUsername(event.target.value)
-        }
-      />
+      {inviteCode !== 'auth/login' && (
+        <Input
+          label="👋 뭐라고 불러드릴까요?"
+          placeholder="사용할 이름을 입력해 주세요."
+          value={username}
+          onChange={(event: React.ChangeEvent<HTMLInputElement>) =>
+            setUsername(event.target.value)
+          }
+        />
+      )}
       <Input
         label="📨 문자 인증이 필요해요."
         placeholder="인증받을 핸드폰 번호를 입력해주세요!"
