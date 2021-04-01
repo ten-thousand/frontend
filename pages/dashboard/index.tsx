@@ -24,6 +24,12 @@ const DashboardPage = () => {
     }
     return userInformation.userReferrals;
   }, [userInformation]);
+  const invitationCount = useMemo(
+    () =>
+      userInformation?.userReferrals.filter(({ status }) => status !== 'USED')
+        .length || 0,
+    [userInformation],
+  );
 
   useEffect(() => {
     if (!error) {
@@ -71,7 +77,7 @@ const DashboardPage = () => {
           <h2>💌 보유한 초대장</h2>
           <h4>가입자가 많아질수록 줄어들어요.</h4>
         </SectionHeader>
-        <InvitationCount count={userInformation?.userReferrals.length || 0} />
+        <InvitationCount count={invitationCount} />
       </Section>
       <Section>
         <SectionHeader>
@@ -79,12 +85,13 @@ const DashboardPage = () => {
           <h4>링크당 한 사람만 초대할 수 있어요.</h4>
         </SectionHeader>
         <LinkList>
-          {inviteLinks.map(({ inviteCode, status }, index) => (
+          {inviteLinks.map(({ inviteCode, status, usedBy }, index) => (
             <LinkRow
               key={inviteCode}
               label={`${index + 1}  🙌`}
               value={`https://loooo.app/referral/${inviteCode}`}
               isUsed={status === 'USED'}
+              usedByUsername={usedBy?.userName || '알 수 없음'}
             />
           ))}
         </LinkList>

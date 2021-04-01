@@ -9,9 +9,15 @@ type Props = {
   label: string;
   value: string;
   isUsed: boolean;
+  usedByUsername?: string;
 };
 
-export const LinkRow: React.FC<Props> = ({ label, value, isUsed }) => {
+export const LinkRow: React.FC<Props> = ({
+  label,
+  value,
+  isUsed,
+  usedByUsername,
+}) => {
   return (
     <Wrapper>
       <Container>
@@ -20,7 +26,7 @@ export const LinkRow: React.FC<Props> = ({ label, value, isUsed }) => {
           <RefLink isUsed={isUsed}>
             <RefLinkText isUsed={isUsed}>
               {isUsed ? (
-                '01030627978'
+                usedByUsername
               ) : (
                 <>
                   <span style={{ fontSize: 0 }}>{`https://`}</span>
@@ -42,9 +48,6 @@ export const LinkRow: React.FC<Props> = ({ label, value, isUsed }) => {
         >
           {isUsed ? '초대완료' : '복사'}
         </CopyButton>
-        {isUsed && false && (
-          <UsedLabel>THIS INVITATION IS ALREADY USED</UsedLabel>
-        )}
       </Container>
     </Wrapper>
   );
