@@ -1,4 +1,4 @@
-import Link from 'next/Link';
+import Link from 'next/link';
 import router from 'next/router';
 import React, { useEffect, useState } from 'react';
 import CountUp from 'react-countup';
