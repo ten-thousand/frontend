@@ -8,6 +8,7 @@
     "start": "next start"
   },
   "dependencies": {
+    "amplitude-js": "^8.1.0",
     "axios": "^0.21.1",
     "express": "^4.17.1",
     "framer-motion": "^4.0.3",
