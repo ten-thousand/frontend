@@ -54,8 +54,9 @@ const DashboardPage = () => {
       );
     } else {
       toast('로그인 후에 확인할 수 있어요. 😇');
-      Analytics.logEvent('view_dashboard_but_redirect');
-      router.push('/referral/auth/login');
+      Analytics.logEvent('view_dashboard_but_redirect').then(() => {
+        router.push('/referral/auth/login');
+      });
     }
   }, [error]);
 

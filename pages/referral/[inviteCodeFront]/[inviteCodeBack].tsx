@@ -57,7 +57,7 @@ const ReferralPage = () => {
         }
         if (data.message === 'NotValidInviteCodeException') {
           toast('올바른 초대 링크가 아닙니다. 죄송해요😭');
-          Analytics.logEvent('view_referral_but_redirect', {
+          await Analytics.logEvent('view_referral_but_redirect', {
             inviteCode,
           });
           router.push('/');
