@@ -1,8 +1,6 @@
-import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
 
-import Clubhouse from '@/components/Intro/Clubhouse';
 import Splash from '@/components/Intro/Splash';
 
 const LandingPage = () => {
