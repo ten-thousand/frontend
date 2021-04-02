@@ -10,9 +10,12 @@ import { CookiesProvider } from 'react-cookie';
 import { ToastContainer } from 'react-toastify';
 
 import { GlobalStyle } from '@/components/GlobalStyle';
+import { Analytics } from '@/utils/analytics';
 import GoogleTagManager from '@/utils/GoogleTagManager';
 
 const SECOND = 1000;
+
+Analytics.initialize();
 
 function MyApp({ Component, pageProps }: AppProps) {
   useEffect(() => {
