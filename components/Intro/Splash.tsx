@@ -6,6 +6,7 @@ import { toast } from 'react-toastify';
 
 import { useTokenInsideCookie } from '@/hooks/useTokenInsideCookie';
 import { useUserCount } from '@/hooks/useUserCount';
+import { Analytics } from '@/utils/analytics';
 
 const SECOND = 1000;
 
@@ -57,10 +58,12 @@ const Splash = () => {
           >
             <button
               className="splash__content__count__invite-only"
-              onClick={() => {
+              onClick={async () => {
                 if (token) {
+                  await Analytics.logEvent('click_invite_someone');
                   router.push('/dashboard');
                 } else {
+                  await Analytics.logEvent('click_invite_only');
                   toast('초대장이 필요해요! 행운을 빕니다. 🤭');
                 }
               }}
@@ -70,7 +73,8 @@ const Splash = () => {
             {!token && (
               <button
                 className="splash__content__count__invite-only"
-                onClick={() => {
+                onClick={async () => {
+                  await Analytics.logEvent('click_login');
                   router.push('/referral/auth/login');
                 }}
                 style={{

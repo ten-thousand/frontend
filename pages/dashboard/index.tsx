@@ -76,7 +76,11 @@ const DashboardPage = () => {
 
   const canAddLink = nextLinkIndex > 0 && nextLinkIndex < allLinks.length;
 
-  const onClickAddLink = () => {
+  const onClickAddLink = async () => {
+    await Analytics.logEvent('click_dashboard_link_more', {
+      userSerial: userInformation.userSerial,
+    });
+
     if (canAddLink) {
       setInviteLinks([...inviteLinks, allLinks[nextLinkIndex]]);
       setNextLinkIndex(nextLinkIndex + 1);
@@ -106,6 +110,12 @@ const DashboardPage = () => {
               value={`https://loooo.app/referral/${inviteCode}`}
               isUsed={status === 'USED'}
               usedByUsername={usedBy?.userName || '알 수 없음'}
+              copyCallback={(value) => {
+                Analytics.logEvent('click_dashboard_link_copy', {
+                  userSerial: userInformation.userSerial,
+                  link: value,
+                });
+              }}
             />
           ))}
         </LinkList>

@@ -5,6 +5,7 @@ import styled from 'styled-components';
 
 import { Button } from '@/components/Common/Button';
 import { Input } from '@/components/Common/Input';
+import { Analytics } from '@/utils/analytics';
 import { Client } from '@/utils/client';
 
 type Props = {
@@ -32,12 +33,31 @@ export const PhoneAuthForm: React.FC<Props> = ({
   const [isAuthCodeSent, setAuthCodeSent] = useState<boolean>(false);
   const [authCode, setAuthCode] = useState<string>('');
 
+  const isLogin = inviteCode === 'auth/login';
   const canSendAuthCode = !!phoneNumber;
   const canCheckAuthCode = !!authCode;
 
-  const onClickRefresh = () => location.reload();
+  const onClickRefresh = async () => {
+    await Analytics.logEvent(
+      'click_phone_auth_refresh',
+      isLogin
+        ? undefined
+        : {
+            inviteCode,
+          },
+    );
+    location.reload();
+  };
 
   const onClickSendAuthCode = async () => {
+    await Analytics.logEvent(
+      'click_phone_auth_request',
+      isLogin
+        ? undefined
+        : {
+            inviteCode,
+          },
+    );
     if (!canSendAuthCode) {
       toast('전화번호를 입력해주세요!');
       return;
@@ -94,7 +114,7 @@ export const PhoneAuthForm: React.FC<Props> = ({
 
   return (
     <>
-      {inviteCode !== 'auth/login' && (
+      {!isLogin && (
         <Input
           label="👋 뭐라고 불러드릴까요?"
           placeholder="사용할 이름을 입력해 주세요."

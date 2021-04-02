@@ -10,6 +10,7 @@ type Props = {
   value: string;
   isUsed: boolean;
   usedByUsername?: string;
+  copyCallback?: (value: string) => void;
 };
 
 export const LinkRow: React.FC<Props> = ({
@@ -17,6 +18,7 @@ export const LinkRow: React.FC<Props> = ({
   value,
   isUsed,
   usedByUsername,
+  copyCallback,
 }) => {
   return (
     <Wrapper>
@@ -42,6 +44,7 @@ export const LinkRow: React.FC<Props> = ({
               return;
             }
             copyToClipboard(value);
+            copyCallback(value);
             toast('클립보드에 초대장 링크를 복사했습니다!');
           }}
           isUsed={isUsed}

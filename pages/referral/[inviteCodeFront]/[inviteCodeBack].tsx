@@ -80,6 +80,15 @@ const ReferralPage = () => {
     phoneNumber: string;
     authCode: string;
   }) => {
+    await Analytics.logEvent(
+      'click_phone_auth_submit',
+      inviteCode === 'auth/login'
+        ? undefined
+        : {
+            inviteCode,
+          },
+    );
+
     console.log({
       verificationIdentifier,
       verificationCode,
