@@ -24,7 +24,7 @@ export const SectionHeader = styled.div`
     text-align: right;
 
     font-size: 16px;
-    line-height: 16px;
+    line-height: 1.2;
     font-weight: 400;
   }
 
