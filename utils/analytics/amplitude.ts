@@ -1,7 +1,8 @@
+import { isBrowser } from '@/hooks/useBrowserEffect';
+
 import { AnalyticsEvent } from './events';
 
 const AMPLITUDE_API_KEY = '8706adb82e0da1d0bfd11ac460db5884';
-const isBrowser = typeof window !== 'undefined';
 
 export async function getAmplitude() {
   if (isBrowser) {
