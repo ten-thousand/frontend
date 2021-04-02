@@ -46,7 +46,8 @@ const BarActive = styled.div<BarActiveProps>`
   height: 8px;
   border-radius: 8px;
   background: linear-gradient(90deg, #976eee 0%, #a053e2 54.17%, #0ca295 100%);
-  width: ${props => `${props.count != null ? props.count * 10 : 0}`}%;
+  width: ${(props) =>
+    `${props.count != null ? Math.min(props.count, 10) * 10 : 0}`}%;
 `;
 
 const BarBase = styled.div`
@@ -71,6 +72,6 @@ const ScaleNumber = styled.span<ScaleNumberProps>`
   line-height: 14px;
   font-weight: 400;
   color: #ffffff;
-  opacity: ${props => (props.isActive ? 1 : 0.4)};
-  font-weight: ${props => (props.isActive ? 600 : 400)};
+  opacity: ${(props) => (props.isActive ? 1 : 0.4)};
+  font-weight: ${(props) => (props.isActive ? 600 : 400)};
 `;
