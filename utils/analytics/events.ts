@@ -3,7 +3,12 @@ export type AnalyticsEvent = {
   view_dashboard: {
     userSerial: number;
   };
+  view_dashboard_but_redirect: undefined;
+  view_login: undefined;
   view_referral: {
+    inviteCode: string;
+  };
+  view_referral_but_redirect: {
     inviteCode: string;
   };
   view_careers: undefined;

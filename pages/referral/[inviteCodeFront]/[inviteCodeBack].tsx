@@ -8,6 +8,7 @@ import { MessageBanner } from '@/components/Common/MessageBanner';
 import { ScreenContainer } from '@/components/Common/ScreenContainer';
 import { InvitationStatus } from '@/components/Dashboard/InvitationStatus';
 import { PhoneAuthForm } from '@/components/Referral/PhoneAuthForm';
+import { Analytics } from '@/utils/analytics';
 import { Client } from '@/utils/client';
 
 const ReferralPage = () => {
@@ -40,6 +41,7 @@ const ReferralPage = () => {
 
     // Login route
     if (inviteCode === 'auth/login') {
+      Analytics.logEvent('view_login');
       return;
     }
 
@@ -47,11 +49,17 @@ const ReferralPage = () => {
       try {
         const { data } = await Client.post('/core/link', { inviteCode });
         if (data.ok) {
+          Analytics.logEvent('view_referral', {
+            inviteCode,
+          });
           setInvitedByUsername(data.data.userName);
           return;
         }
         if (data.message === 'NotValidInviteCodeException') {
           toast('올바른 초대 링크가 아닙니다. 죄송해요😭');
+          Analytics.logEvent('view_referral_but_redirect', {
+            inviteCode,
+          });
           router.push('/');
         }
       } catch (error) {

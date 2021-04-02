@@ -10,7 +10,9 @@ import { InvitationStatus } from '@/components/Dashboard/InvitationStatus';
 import { LinkRow } from '@/components/Dashboard/LinkRow';
 import { Section } from '@/components/Dashboard/Section';
 import { SectionHeader } from '@/components/Dashboard/SectionHeader';
+import { useBrowserEffect } from '@/hooks/useBrowserEffect';
 import { UserReferral as InviteLink, useUserInformation } from '@/hooks/useUserInformation';
+import { Analytics } from '@/utils/analytics';
 
 const DashboardPage = () => {
   const router = useRouter();
@@ -31,6 +33,16 @@ const DashboardPage = () => {
     [userInformation],
   );
 
+  useBrowserEffect(() => {
+    if (!userInformation) {
+      return;
+    }
+
+    Analytics.logEvent('view_dashboard', {
+      userSerial: userInformation.userSerial,
+    });
+  }, [userInformation]);
+
   useEffect(() => {
     if (!error) {
       return;
@@ -42,6 +54,7 @@ const DashboardPage = () => {
       );
     } else {
       toast('로그인 후에 확인할 수 있어요. 😇');
+      Analytics.logEvent('view_dashboard_but_redirect');
       router.push('/referral/auth/login');
     }
   }, [error]);

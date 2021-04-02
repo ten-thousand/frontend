@@ -1,8 +1,14 @@
-import Link from 'next/link';
 import React from 'react';
 import styled from 'styled-components';
 
+import { useBrowserEffect } from '@/hooks/useBrowserEffect';
+import { Analytics } from '@/utils/analytics';
+
 const Careers = () => {
+  useBrowserEffect(() => {
+    Analytics.logEvent('view_careers');
+  }, []);
+
   return (
     <Container>
       <div className="splash">
