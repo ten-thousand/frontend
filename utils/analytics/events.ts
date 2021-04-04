@@ -40,4 +40,7 @@ export type AnalyticsEvent = {
   click_dashboard_link_more: {
     userSerial: number;
   };
+  click_dashboard_link_disabled: {
+    userSerial: number;
+  };
 };

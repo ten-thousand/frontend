@@ -1,26 +1,14 @@
 import Link from 'next/link';
 import router from 'next/router';
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import CountUp from 'react-countup';
 import { toast } from 'react-toastify';
 
 import { useTokenInsideCookie } from '@/hooks/useTokenInsideCookie';
-import { useUserCount } from '@/hooks/useUserCount';
 import { Analytics } from '@/utils/analytics';
-
-const SECOND = 1000;
 
 const Splash = () => {
   const token = useTokenInsideCookie();
-
-  const count = useUserCount();
-  const [countEnd, setCountEnd] = useState<number | null>(null);
-
-  useEffect(() => {
-    if (count) {
-      setCountEnd(count);
-    }
-  }, [count]);
 
   return (
     <div className="splash">
@@ -33,20 +21,16 @@ const Splash = () => {
         </div>
         <div className="splash__content__count">
           <h1>
-            {countEnd ? (
-              <CountUp start={0} end={countEnd} delay={0}>
-                {({ countUpRef }) => <span ref={countUpRef} />}
-              </CountUp>
-            ) : (
-              '0'
-            )}
-            <span className="suffix">명</span>
+            <CountUp start={0} end={10000} delay={0}>
+              {({ countUpRef }) => <span ref={countUpRef} />}
+            </CountUp>
+            <span className="suffix">+ 명</span>
           </h1>
           <h3>10000까지만 올라갑니다.</h3>
           <h5>
             지금은 Limited Beta입니다.
             <br />
-            4월 5일에 앱스토어에서 만나요 👋
+            4월 6일에 앱스토어에서 만나요 👋
           </h5>
           <div
             style={{

@@ -15,7 +15,7 @@ const Careers = () => {
         <div className="splash-content">
           <div className="careers__wrapper">
             <h3 style={{ lineHeight: 1.5 }}>
-              loooo. 4월 5일에 런칭 예정인 소셜 앱 입니다.
+              loooo. 4월 6일에 런칭 예정인 소셜 앱 입니다.
               <br />
               지금은 Limited Beta로 출시 되어있습니다.
             </h3>

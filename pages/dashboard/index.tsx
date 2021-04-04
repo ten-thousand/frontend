@@ -77,6 +77,12 @@ const DashboardPage = () => {
   const canAddLink = nextLinkIndex > 0 && nextLinkIndex < allLinks.length;
 
   const onClickAddLink = async () => {
+    await Analytics.logEvent('click_dashboard_link_disabled', {
+      userSerial: userInformation.userSerial,
+    });
+    toast('죄송해요! 지금은 더 초대장을 만들 수 없어요.');
+    return;
+
     await Analytics.logEvent('click_dashboard_link_more', {
       userSerial: userInformation.userSerial,
     });
@@ -102,7 +108,18 @@ const DashboardPage = () => {
           <h2>🔗 초대 링크</h2>
           <h4>링크당 한 사람만 초대할 수 있어요.</h4>
         </SectionHeader>
-        <LinkList>
+        <div
+          style={{
+            height: 180,
+            color: 'rgba(255, 255, 255, 0.9)',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}
+        >
+          <strong>지금은 초대장을 더 만들 수 없어요.</strong>
+        </div>
+        {/* <LinkList>
           {inviteLinks.map(({ inviteCode, status, usedBy }, index) => (
             <LinkRow
               key={inviteCode}
@@ -118,10 +135,10 @@ const DashboardPage = () => {
               }}
             />
           ))}
-        </LinkList>
+        </LinkList> */}
         {canAddLink && (
           <AddLinkButton primary onClick={onClickAddLink}>
-            + 링크 더 보기
+            초대장 이벤트 끝!
           </AddLinkButton>
         )}
       </Section>

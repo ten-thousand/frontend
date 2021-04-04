@@ -1,33 +1,22 @@
-import React, { useEffect, useState } from 'react';
+import React from 'react';
 import CountUp from 'react-countup';
 import styled from 'styled-components';
 
-import { useUserCount } from '@/hooks/useUserCount';
-
 export const InvitationStatus: React.FC = () => {
-  const count = useUserCount();
-  const [countEnd, setCountEnd] = useState<number | null>(null);
-
-  useEffect(() => {
-    if (count) {
-      setCountEnd(count);
-    }
-  }, [count]);
-
   return (
     <Container>
       <NumberOfPeopleJoined>
-        {countEnd ? (
-          <CountUp start={0} end={countEnd} delay={0}>
-            {({ countUpRef }) => <span ref={countUpRef} />}
-          </CountUp>
-        ) : (
-          '0'
-        )}
-        <NumberOfPeopleJoinedSuffix>명</NumberOfPeopleJoinedSuffix>
+        <CountUp start={0} end={10000} delay={0}>
+          {({ countUpRef }) => <span ref={countUpRef} />}
+        </CountUp>
+        <NumberOfPeopleJoinedSuffix>+ 명</NumberOfPeopleJoinedSuffix>
       </NumberOfPeopleJoined>
       <TotalNumberOfInvitations>/ 10000</TotalNumberOfInvitations>
-      <h5 className="footnote">지금은 Limited Beta입니다.<br/>4월 5일에 앱스토어 런칭과 동시에 계정이 열립니다.</h5>
+      <h5 className="footnote">
+        지금은 Limited Beta입니다.
+        <br />
+        4월 6일에 앱스토어 런칭과 동시에 계정이 열립니다.
+      </h5>
     </Container>
   );
 };
